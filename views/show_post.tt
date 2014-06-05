@@ -1,0 +1,40 @@
+
+<% IF entries.size %> 
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="panel-heading littlemargin"><% entries.title %></h2>
+		</div>
+		<div class="panel-body">
+			<% entries.text_all %>
+		</div>
+	</div>
+<% ELSE %>
+  <li><em>Unbelievable.  No entries here so far</em>
+<% END %>
+
+
+<hr>
+<% IF comments.size %>
+	<% FOREACH comment = comments %>
+	<div class="well">
+		<span class="pull-right"> <% comment.2 %> </span>
+		<p class="lead"><% comment.0 %></p> <br> <p><% comment.1 %></p>
+	</div>
+	<% END %>
+<% ELSE %>
+  <em>No coments here</em>
+<% END %>
+
+<form action="<% add_comment_url %>" method=post class=add-entry>
+	<dl>
+	  <div class="form-groups">
+		  <dt>Author:
+		  <dd><input class="form-control " name=author rows=1 cols=10></input>
+	  </div>
+	  <div class="form-groups">
+		  <dt>Text:
+		  <dd><textarea class="form-control" name=text rows=5 cols=40></textarea>
+		  <dd><input type=submit value=Comment class="btn btn-lg btn-default myButton">
+	  </div>
+	</dl>
+</form>

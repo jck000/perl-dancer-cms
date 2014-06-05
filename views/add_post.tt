@@ -1,0 +1,18 @@
+<% IF session.logged_in %>
+  <form action="<% add_post %>" method=post class=add-entry>
+    <dl>
+      <dt>Title:
+      <dd><input class="form-control" type=text size=30 name=title 
+		<% IF post.size %> value="<% post.title %>" <% END %> >
+      <dt>Text:
+      <dd><textarea class="form-control" name=text rows=5 cols=40>
+		<% IF post.size %> <% post.text %>" <% END %></textarea>
+      <dt>Text all:
+      <dd><textarea class="form-control" name=text_all rows=5 cols=40>
+		<% IF post.size %> <% post.text_all %>" <% END %></textarea>
+      <dd><input type=submit value=Share class='btn btn-default btn-lg myButton'>
+    </dl>
+  </form>
+<% ELSE %>
+	<h2>Plese log in</h2>
+<% END %>

@@ -1,0 +1,33 @@
+
+<!-- Beging content -->
+<div class="entries">
+	<% IF entries.size %>
+	  <% FOREACH id = entries %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="pull-left panel-heading littlemargin"><a href="<% domen %>/view/<% id.0 %>/"><% id.1 %></a></h2> <p class="text-right"><span class="glyphicon glyphicon-time"></span><% id.3 %> <br> <% id.4 %> Comment<% IF id.4 > 1 %>s<% END %> </p>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<% id.2 %>
+				<div class="btn-group">
+				<a class="btn btn-default btn-lg mybtn" href="<% domen %>/view/<% id.0 %>/">Read post</a>
+				<% IF session.logged_in %>
+					<a class="btn btn-warning btn-lg" href="<% domen %>/update/<% id.0 %>/"> Update post</a>
+					<a class="btn btn-danger btn-lg" href="<% domen %>/delete/<% id.0 %>/"> Delete post</a>
+				<% END %>
+				</div>
+			</div>
+		</div>
+	  <% END %>
+	  
+	<% ELSE %>
+	  <em>Unbelievable.  No entries here so far</em>
+	<% END %>
+</div>
+<!-- End content -->
+
+<ul class="pagination pagination-lg">
+	<li <% IF cur_page <= 0 %>class="disabled"<% END %> ><a href="<% domen %>/page/<% numbers.0 %>/">&laquo;Previous</a></li>
+	<li <% IF cur_page >= nb_of_pg %>class="disabled"<% END %> ><a href="<% domen %>/page/<% numbers.1 %>/">Next&raquo;</a></li>
+</ul>
