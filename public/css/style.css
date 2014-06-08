@@ -1,3 +1,16 @@
+body {
+	position: relative;
+}
+
 .myButton {
 	margin-top: 10px;
+}
+
+#results {
+	background: #fff;
+	width: 75%;
+	position: absolute;
+	top: 10%;
+	right: 5%;
+	z-index: 2;
 }

@@ -21,6 +21,7 @@ set 'warnings'     => 1;
 set 'username'     => 'admin';
 set 'password'     => 'password';
 set 'layout'       => 'main';
+set 'serializer'   => 'JSON';
 
  
 my $flash;
@@ -302,25 +303,15 @@ get '/logout' => sub {
 	redirect '/';
 };
 
-get qr{/hi/([\w]+)} => sub {
-	my ($name) = splat;
-	return "Hello $name";
-};
- 
-get '/hello/:name' => sub {
-	"Hello there ".param('name').", welcome here!";
-}; 
-
-get '/batman' => sub {
-	return request->uri_base . request->uri;
-};
-
-get '/abba' => sub {
-	return request->path;
-};
-
-get '/bob' => sub {
-	template 'show_entries.tt';
+get '/json/' => sub {
+	#  if params->{'srsearch'} && params->{'json'} do
+	my $db = connect_db();
+	
+	my $sql = 'select id, title, text from entries where title like ?';
+    my $sth = $db->prepare($sql) or die $db->errstr;
+    $sth->execute('%' . params->{'srsearch'} . '%') or die $sth->errstr;
+    
+    return to_json $sth->fetchall_hashref('id');
 };
 
 init_db();
